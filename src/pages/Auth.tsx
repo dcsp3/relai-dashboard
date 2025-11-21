@@ -22,42 +22,42 @@ const Auth = () => {
     });
   }, [navigate]);
 
-  // const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   setIsLoading(true);
+  const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
 
-  //   const formData = new FormData(e.currentTarget);
-  //   const email = formData.get("signup-email") as string;
-  //   const password = formData.get("signup-password") as string;
-  //   const fullName = formData.get("full-name") as string;
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("signup-email") as string;
+    const password = formData.get("signup-password") as string;
+    const fullName = formData.get("full-name") as string;
 
-  //   const { error } = await supabase.auth.signUp({
-  //     email,
-  //     password,
-  //     options: {
-  //       emailRedirectTo: `${window.location.origin}/`,
-  //       data: {
-  //         full_name: fullName,
-  //       },
-  //     },
-  //   });
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        emailRedirectTo: `${window.location.origin}/`,
+        data: {
+          full_name: fullName,
+        },
+      },
+    });
 
-  //   setIsLoading(false);
+    setIsLoading(false);
 
-  //   if (error) {
-  //     toast({
-  //       title: "Signup failed",
-  //       description: error.message,
-  //       variant: "destructive",
-  //     });
-  //   } else {
-  //     toast({
-  //       title: "Success!",
-  //       description: "Account created successfully. You're now logged in.",
-  //     });
-  //     navigate("/");
-  //   }
-  // };
+    if (error) {
+      toast({
+        title: "Signup failed",
+        description: error.message,
+        variant: "destructive",
+      });
+    } else {
+      toast({
+        title: "Success!",
+        description: "Account created successfully. You're now logged in.",
+      });
+      navigate("/");
+    }
+  };
 
   const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -94,17 +94,17 @@ const Auth = () => {
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle>Welcome to RelAI</CardTitle>
-          <CardDescription>Sign in to your account</CardDescription>
+          <CardDescription>Sign in to your account or create a new one</CardDescription>
         </CardHeader>
         <CardContent>
-          {/* <Tabs defaultValue="signin" className="w-full">
+          <Tabs defaultValue="signin" className="w-full">
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="signin">Sign In</TabsTrigger>
               <TabsTrigger value="signup">Sign Up</TabsTrigger>
             </TabsList>
 
-            <TabsContent value="signin"> */}
-              <form onSubmit={handleSignIn} className="space-y-4 mt-4">
+            <TabsContent value="signin">
+              <form onSubmit={handleSignIn} className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="signin-email">Email</Label>
                   <Input
@@ -129,7 +129,7 @@ const Auth = () => {
                   {isLoading ? "Signing in..." : "Sign In"}
                 </Button>
               </form>
-            {/* </TabsContent>
+            </TabsContent>
 
             <TabsContent value="signup">
               <form onSubmit={handleSignUp} className="space-y-4">
@@ -169,7 +169,7 @@ const Auth = () => {
                 </Button>
               </form>
             </TabsContent>
-          </Tabs> */}
+          </Tabs>
         </CardContent>
       </Card>
     </div>
