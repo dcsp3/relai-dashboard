@@ -14,6 +14,117 @@ export type Database = {
   }
   public: {
     Tables: {
+      ai_tool_limits: {
+        Row: {
+          created_at: string | null
+          daily_limit_minutes: number
+          id: string
+          tool_name: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          daily_limit_minutes: number
+          id?: string
+          tool_name: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          daily_limit_minutes?: number
+          id?: string
+          tool_name?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      ai_usage_logs: {
+        Row: {
+          created_at: string | null
+          duration_minutes: number
+          id: string
+          tool_category: Database["public"]["Enums"]["ai_tool_category"]
+          tool_name: string
+          usage_date: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          duration_minutes?: number
+          id?: string
+          tool_category?: Database["public"]["Enums"]["ai_tool_category"]
+          tool_name: string
+          usage_date?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          duration_minutes?: number
+          id?: string
+          tool_category?: Database["public"]["Enums"]["ai_tool_category"]
+          tool_name?: string
+          usage_date?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      badges: {
+        Row: {
+          badge_type: Database["public"]["Enums"]["badge_type"]
+          created_at: string | null
+          description: string
+          icon: string
+          id: string
+          name: string
+          points_required: number | null
+        }
+        Insert: {
+          badge_type: Database["public"]["Enums"]["badge_type"]
+          created_at?: string | null
+          description: string
+          icon: string
+          id?: string
+          name: string
+          points_required?: number | null
+        }
+        Update: {
+          badge_type?: Database["public"]["Enums"]["badge_type"]
+          created_at?: string | null
+          description?: string
+          icon?: string
+          id?: string
+          name?: string
+          points_required?: number | null
+        }
+        Relationships: []
+      }
+      friendships: {
+        Row: {
+          created_at: string | null
+          friend_id: string
+          id: string
+          status: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          friend_id: string
+          id?: string
+          status?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          friend_id?: string
+          id?: string
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -41,6 +152,124 @@ export type Database = {
         }
         Relationships: []
       }
+      reflection_prompts: {
+        Row: {
+          created_at: string | null
+          id: string
+          prompt_date: string
+          prompt_text: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          prompt_date: string
+          prompt_text: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          prompt_date?: string
+          prompt_text?: string
+        }
+        Relationships: []
+      }
+      user_badges: {
+        Row: {
+          badge_id: string
+          earned_at: string | null
+          id: string
+          user_id: string
+        }
+        Insert: {
+          badge_id: string
+          earned_at?: string | null
+          id?: string
+          user_id: string
+        }
+        Update: {
+          badge_id?: string
+          earned_at?: string | null
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_badges_badge_id_fkey"
+            columns: ["badge_id"]
+            isOneToOne: false
+            referencedRelation: "badges"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_reflections: {
+        Row: {
+          created_at: string | null
+          id: string
+          prompt_id: string
+          reflection_text: string
+          small_win: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          prompt_id: string
+          reflection_text: string
+          small_win?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          prompt_id?: string
+          reflection_text?: string
+          small_win?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_reflections_prompt_id_fkey"
+            columns: ["prompt_id"]
+            isOneToOne: false
+            referencedRelation: "reflection_prompts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_stats: {
+        Row: {
+          created_at: string | null
+          current_streak: number | null
+          id: string
+          last_activity_date: string | null
+          longest_streak: number | null
+          total_points: number | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          current_streak?: number | null
+          id?: string
+          last_activity_date?: string | null
+          longest_streak?: number | null
+          total_points?: number | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          current_streak?: number | null
+          id?: string
+          last_activity_date?: string | null
+          longest_streak?: number | null
+          total_points?: number | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -49,7 +278,13 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      ai_tool_category: "chatbot" | "writing" | "coding" | "image" | "other"
+      badge_type:
+        | "streak"
+        | "usage_reduction"
+        | "reflection"
+        | "social"
+        | "special"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -176,6 +411,15 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      ai_tool_category: ["chatbot", "writing", "coding", "image", "other"],
+      badge_type: [
+        "streak",
+        "usage_reduction",
+        "reflection",
+        "social",
+        "special",
+      ],
+    },
   },
 } as const

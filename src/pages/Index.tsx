@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
-import StatsCards from "@/components/StatsCards";
-import UsageChart from "@/components/UsageChart";
-import AIAppsList from "@/components/AIAppsList";
+import StreaksInsights from "@/components/StreaksInsights";
+import ActivityHeatmap from "@/components/ActivityHeatmap";
+import ReflectionPrompt from "@/components/ReflectionPrompt";
+import Leaderboard from "@/components/Leaderboard";
+import BadgesDisplay from "@/components/BadgesDisplay";
+import ToolLimits from "@/components/ToolLimits";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -35,19 +38,29 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="container mx-auto px-4 py-8">
-        <div className="mb-8">
+      <main className="container mx-auto px-4 py-8 space-y-8">
+        <div>
           <h1 className="text-3xl font-bold text-foreground mb-2">
             Your AI Usage Dashboard
           </h1>
           <p className="text-muted-foreground">
-            Monitor and control your AI application usage to boost productivity
+            Track your progress, reflect on your habits, and compete with friends
           </p>
         </div>
         
-        <StatsCards />
-        <UsageChart />
-        <AIAppsList />
+        <StreaksInsights />
+        
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <ActivityHeatmap />
+          <ReflectionPrompt />
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <Leaderboard />
+          <BadgesDisplay />
+        </div>
+
+        <ToolLimits />
       </main>
     </div>
   );
