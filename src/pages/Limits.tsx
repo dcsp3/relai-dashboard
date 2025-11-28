@@ -75,7 +75,7 @@ const Limits = () => {
                                   <button
                                       onClick={() =>
                                           setDailyLimit((v) =>
-                                              Math.max(0, v - 1)
+                                              Math.min(600, v + 1)
                                           )
                                       }
                                       className="p-2 mb-12 rounded-md bg-secondary hover:bg-secondary/70 transition flex items-center justify-center"
@@ -94,7 +94,7 @@ const Limits = () => {
                                   <button
                                       onClick={() =>
                                           setDailyLimit((v) =>
-                                              Math.min(600, v + 1)
+                                              Math.max(0, v - 1)
                                           )
                                       }
                                       className="p-2 mb-12 rounded-md bg-secondary hover:bg-secondary/70 transition flex items-center justify-center"
