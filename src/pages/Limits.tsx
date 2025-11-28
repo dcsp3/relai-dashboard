@@ -154,7 +154,7 @@ const Limits = () => {
                                       <span className="text-sm">
                                           Soft-lock delay
                                       </span>
-                                      <Switch />
+                                      <Switch defaultChecked />
                                   </div>
 
                                   <div className="flex items-center justify-between p-3 rounded-lg bg-secondary/30 border border-border/40">
