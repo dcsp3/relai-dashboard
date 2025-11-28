@@ -70,7 +70,7 @@ const Limits = () => {
                           </CardHeader>
 
                           <CardContent>
-                              <div className="flex items-center justify-center w-full gap-6">
+                              <div className="flex mt-6 items-center justify-center w-full gap-6">
                                   {/* Left arrow */}
                                   <button
                                       onClick={() =>
@@ -159,7 +159,7 @@ const Limits = () => {
 
                                   <div className="flex items-center justify-between p-3 rounded-lg bg-secondary/30 border border-border/40">
                                       <span className="text-sm">
-                                          AI Adblock
+                                          AI AdBlock
                                       </span>
                                       <Switch />
                                   </div>

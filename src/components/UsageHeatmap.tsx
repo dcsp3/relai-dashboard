@@ -4,7 +4,7 @@ import { Grid3X3 } from "lucide-react";
 import { InfoTooltip } from "./InfoTooltip";
 
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-const WEEKS_TO_SHOW = 12;
+const WEEKS_TO_SHOW = 11;
 
 type DayCell = { date: Date; value: number };
 
